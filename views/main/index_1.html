@@ -1,0 +1,38 @@
+{% extends 'index.html' %}
+{%block content%}
+    {%for  content in contents%}
+    <div class="jumbotron">
+        <h3 style="text-align: center">{{content.title}}</h3>
+        <p style="font-size: 15px">
+            作者：<span>{{content.user.username}}</span>-
+            时间：<span>{{content.addTime|date('Y年m月d日 H:i:s',-8*60)}}</span>-
+            阅读量：<span>{{content.views}}</span>-
+            评论：<span>{{content.comments.length}}</span>
+        </p>
+        <p>{{content.description}}</p>
+        <p><a class="btn btn-primary btn-sm" href="/view?contentId={{content.id}}" role="button">查看全文</a></p>
+    </div>
+    {%endfor%}
+    <nav>
+        <ul class="pager">
+
+            {%if page<=1%}
+            <li class="previous"><a href="#"><span aria-hidden="true">&larr;</span>没有上一页了</a></li>
+            {%else%}
+            <li class="previous"><a href="/?category={{category}}&page={{page-1}}"><span aria-hidden="true">&larr;</span> 上一页</a></li>
+            {%endif%}
+
+            {%if pages>0%}
+            <li>
+                {{page}}/{{pages}}
+            </li>
+            {%endif%}
+
+            {%if page>= pages%}
+            <li class="next"><a href="#">已经是最后一页了 <span aria-hidden="true">&rarr;</span></a></li>
+            {%else%}
+            <li class="next"><a href="/?category={{category}}&page={{page+1}}">下一页 <span aria-hidden="true">&rarr;</span></a></li>
+            {%endif%}
+        </ul>
+    </nav>
+{%endblock%}

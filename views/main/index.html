@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="/public/css/bootstrap.min.css">
+    <link  rel="stylesheet" type="text/css" href="/public/css/main.css">
+</head>
+<body>
+<div class="container-fluid">
+    <img src="/public/img/banner1.png" style="width:100%"/>
+    <ul class="nav nav-tabs col-md-offset-2">
+        {%if category==''%}
+        <li role="presentation" class="active"><a href="/">首页</a></li>
+        {%else%}
+        <li role="presentation"><a href="/">首页</a></li>
+        {%endif%}
+        {%for cate in categories%}
+        {%if category==cate.id%}
+        <li role="presentation" class="active"><a href="/?category={{cate.id}}">{{cate.name}}</a></li>
+        {%else%}
+        <li role="presentation"><a href="/?category={{cate.id}}">{{cate.name}}</a></li>
+        {%endif%}
+        {%endfor%}
+    </ul>
+    <br/>
+      <!--内容-->
+      <!--左边-->
+         <div class="row" id="neirong">
+             <div class="col-xs-12 col-sm-8  col-md-6 col-md-offset-2">
+                 {%block content%}{%endblock%}
+             </div>
+             <!--右边模块-->
+             <div class="hidden-xs col-sm-4 col-md-3" >
+                 <!--显示信息-->
+                    {%if userInfo._id%}
+                         <div class="panel panel-default" id="userInfo">
+                             <div class="panel-heading text-center">用户信息</div>
+                             <div class="panel-body">
+                                 <p>{{userInfo.username}}</p>
+                                 {%if userInfo.isAdmin%}
+                                 <span >你好,管理员！</span>
+                                 <a href="/admin">进入管理</a>
+                             </div>
+                             {%else%}
+                             <span >你好！欢迎来到我的博客！</span>
+                             {%endif%}
+                             <div class="panel-body">
+                                 <a href="javascript:;" id="logout">退出</a>
+                             </div>
+                         </div>
+                 <!--登录-->
+             {%else%}
+                 <form class="form-horizontal" id="loginBox">
+                     <div class="panel panel-default">
+                         <div class="panel-heading text-center">登录</div>
+                         <div class="panel-body">
+                             <div class="form-group">
+                                 <label for="username" class="col-xs-4 control-label ">用户</label>
+                                 <div class="col-sm-8">
+                                     <input type="email" name="username" class="form-control" id="username" placeholder="username">
+                                 </div>
+                             </div>
+                             <div class="form-group">
+                                 <label for="password" class="col-xs-4 control-label ">密码</label>
+                                 <div class="col-xs-8">
+                                     <input type="password" name="password" class="form-control" id="password" placeholder="Password">
+                                 </div>
+                             </div>
+                             <div class="form-group">
+                                 <div class="col-xs-offset-3 col-xs-9">
+                                     <input type="button" value="登陆" class="btn btn-default col-xs-10  btn-primary" />
+                                 </div>
+                                 <div class="text-right" style=" font-size: 12px; margin-right: 20px;margin-top: 50px">还没注册？<a href="javascript:;" class="colMint">马上注册</a></div>
+                             </div>
+                             <p class=" colWarning text-danger" role="alert" style="text-align: center"></p>
+                         </div>
+                         </div>
+                 </form>
+                     <!--注册-->
+                 {%endif%}
+                 <form class="form-horizontal" id="registerBox"  style="display: none">
+                     <div class="panel panel-default">
+                         <div class="panel-heading text-center">注册</div>
+                         <div class="panel-body">
+                             <div class="form-group">
+                                 <label for="username-1" class="col-sm-4 control-label">用户</label>
+                                 <div class="col-sm-8">
+                                     <input type="email" name="username" class="form-control" id="username-1" placeholder="username">
+                                 </div>
+                             </div>
+                             <div class="form-group">
+                                 <label for="password-1" class="col-sm-4 control-label">密码</label>
+                                 <div class="col-sm-8">
+                                     <input type="password" name="password" class="form-control" id="password-1" placeholder="Password">
+                                 </div>
+                             </div>
+                             <div class="form-group">
+                                 <label for="repassword" class="col-sm-4 control-label">确认</label>
+                                 <div class="col-sm-8">
+                                     <input type="password" name="repassword" class="form-control" id="repassword" placeholder="repassword">
+                                 </div>
+                             </div>
+                             <div class="form-group">
+                                 <div class="col-xs-offset-3 col-xs-9">
+                                     <input type="button" value="注册" class="btn btn-default btn-danger col-xs-10  " />
+                                 </div>
+                                 <div class="text-right" style=" font-size: 12px; margin-right: 20px;margin-top: 50px">已有帐号？<a href="javascript:;" class=" colMint ">立即登录</a></div>
+                             </div>
+                             <p class=" colWarning text-danger" role="alert" style="text-align: center"></p>
+                         </div>
+                     </div>
+                 </form>
+             </div>
+         </div>
+
+  </div>
+<!--js文件-->
+  <script type="text/javascript" src="/public/js/jquery-1.11.3.js"></script>
+  <script type="text/javascript" src="/public/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="/public/js/index.js"></script>
+<script type="text/javascript" src="/public/js/comment.js"></script>
+
+
+</body>
+</html>

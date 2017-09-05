@@ -1,0 +1,7 @@
+#neirong{
+    margin-top: 30px;
+}
+/*注册登录的样式*/
+#registerBox,#loginBox{
+    border-radius: 8px;
+}
